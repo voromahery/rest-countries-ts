@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import { GlobalContext } from "./../GlobalContext";
 
 export default function Card() {
-  const countryData = useContext(GlobalContext);
-  console.log(countryData, "HIIIIIII");
+  // const countryData = useContext(GlobalContext);
+  // console.log(countryData, "HIIIIIII");
 
   return (
     <div>
