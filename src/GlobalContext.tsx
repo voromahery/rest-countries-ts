@@ -1,32 +1,32 @@
 import React, { createContext, useReducer, useEffect } from "react";
 
-type Country = {
-  [
-    name: string,
-    topLevelDomain: string[],
-    alpha2Code: string,
-    alpha3Code: string,
-    callingCodes: string[],
-    capital: string,
-    altSpellings: string[],
-    region: string,
-    subregion: string,
-    population: number,
-    latlng: number[],
-    demonym: string,
-    area: number,
-    gini: number,
-    timezones: string[],
-    borders: string[],
-    nativeName: string,
-    numericCode: string,
+type Country = [
+  {
+    name: string;
+    topLevelDomain: string[];
+    alpha2Code: string;
+    alpha3Code: string;
+    callingCodes: string[];
+    capital: string;
+    altSpellings: string[];
+    region: string;
+    subregion: string;
+    population: number;
+    latlng: number[];
+    demonym: string;
+    area: number;
+    gini: number;
+    timezones: string[];
+    borders: string[];
+    nativeName: string;
+    numericCode: string;
     currencies: [
       {
         code: string;
         name: string;
         symbol: string;
       }
-    ],
+    ];
     languages: [
       {
         iso639_1: string;
@@ -34,7 +34,7 @@ type Country = {
         name: string;
         nativeName: string;
       }
-    ],
+    ];
     translations: {
       de: string;
       es: string;
@@ -46,8 +46,8 @@ type Country = {
       nl: string;
       hr: string;
       fa: string;
-    },
-    flag: string,
+    };
+    flag: string;
     regionalBlocs: [
       {
         acronym: string;
@@ -55,10 +55,10 @@ type Country = {
         otherAcronyms: string[];
         otherNames: string[];
       }
-    ],
-    cioc: string,
-  ];
-};
+    ];
+    cioc: string;
+  }
+];
 
 let initialState: Country = [
   {
@@ -74,8 +74,8 @@ let initialState: Country = [
     population: 0,
     latlng: [],
     demonym: "",
-    area: [],
-    gini: [],
+    area: 0,
+    gini: 0,
     timezones: [],
     borders: [],
     nativeName: "",
@@ -87,6 +87,36 @@ let initialState: Country = [
         symbol: "",
       },
     ],
+    languages: [
+      {
+        iso639_1: "",
+        iso639_2: "",
+        name: "",
+        nativeName: "",
+      },
+    ],
+    translations: {
+      de: "",
+      es: "",
+      fr: "",
+      ja: "",
+      it: "",
+      br: "",
+      pt: "",
+      nl: "",
+      hr: "",
+      fa: "",
+    },
+    flag: "",
+    regionalBlocs: [
+      {
+        acronym: "",
+        name: "",
+        otherAcronyms: [],
+        otherNames: [],
+      },
+    ],
+    cioc: "",
   },
   // isLoading: true,
   // error: null,
