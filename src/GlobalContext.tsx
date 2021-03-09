@@ -1,14 +1,10 @@
 import React, { createContext, useReducer, useEffect } from "react";
 type State = {
-  response: any;
-  // isLoading: boolean;
-  // error: string;
+  countryData: any;
 };
 
 let initialState: State = {
-  response: [],
-  // isLoading: false,
-  // error: "",
+  countryData: [],
 };
 
 type Country = [
@@ -78,22 +74,13 @@ type Action =
 
 function reducer(state: State = initialState, action: Action) {
   switch (action.type) {
-    // case "LOADING":
-    //   return { ...state, isLoading: action.payload };
     case "RESOLVED":
       return {
         ...state,
         isLoading: false,
-        response: action.payload,
+        countryData: action.payload,
         error: null,
       };
-    // case "ERROR":
-    //   return {
-    //     ...state,
-    //     isLoading: false,
-    //     response: null,
-    //     error: action.payload,
-    //   };
     default:
       return state;
   }
@@ -106,8 +93,8 @@ const GlobalProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   async function fetchData() {
-    const response = await fetch(link);
-    const data = await response.json();
+    const countryData = await fetch(link);
+    const data = await countryData.json();
     console.log(data);
     
     dispatch({ type: "RESOLVED", payload: data });
@@ -118,7 +105,7 @@ const GlobalProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <GlobalContext.Provider value={{ response: state.response }}>
+    <GlobalContext.Provider value={{ countryData: state.countryData }}>
       {children}
     </GlobalContext.Provider>
   );
