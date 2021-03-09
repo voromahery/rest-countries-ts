@@ -60,7 +60,7 @@ type Country = [
   }
 ];
 
-let initialState: Country = [
+let initialCountry: Country = [
   {
     name: "",
     topLevelDomain: [],
@@ -118,24 +118,39 @@ let initialState: Country = [
     ],
     cioc: "",
   },
-  // isLoading: true,
-  // error: null,
 ];
 
-type State = {
+
+
+interface State {
   response?: Country[];
   isLoading: boolean;
   error: string;
-};
+}
 
-type Action = { type: "LOADING" } | { type: "RESOLVED" } | { type: "ERROR" };
+type Action =
+  | { type: "LOADING"; isLoading: boolean }
+  | { type: "RESOLVED"; response: Country[] }
+  | { type: "ERROR"; error: string };
+
+  let initialState:State= {
+    response: [],
+    isLoading: false,
+    error: "",
+  };
+  
 
 function reducer(state: State, action: Action) {
   switch (action.type) {
     case "LOADING":
       return { ...state, isLoading: true };
     case "RESOLVED":
-      return { ...state, response: action };
+      return {
+        ...state,
+        isLoading: false,
+        response: action.response,
+        error: null,
+      };
     case "ERROR":
       return {
         ...state,
@@ -151,25 +166,17 @@ function reducer(state: State, action: Action) {
 export const GlobalContext = createContext(initialState);
 
 const GlobalProvider: React.FC = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
   const link = `https://restcountries.eu/rest/v2/all`;
+  const [state, dispatch] = useReducer(reducer, initialState)
+
+  async function fetchData() {
+    const response = await fetch(link);
+    const data = await response.json();
+    // dispatch({ type: "RESOLVED", response: data });
+  }
 
   useEffect(() => {
-    let isCurrent: boolean = true;
-    // dispatch({ type: "LOADING", isLoading });
-    fetch(link)
-      .then((response) => response.json())
-      .then((json) => {
-        if (isCurrent) {
-          dispatch({ type: "RESOLVED", response: json });
-        }
-      });
-    // .catch((error) => {
-    //   dispatch({ type: "ERROR", error });
-    // });
-    return () => {
-      isCurrent = false;
-    };
+    fetchData();
   }, []);
 
   return (
