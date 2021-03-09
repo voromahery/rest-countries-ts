@@ -1,4 +1,15 @@
 import React, { createContext, useReducer, useEffect } from "react";
+type State = {
+  response: any;
+  // isLoading: boolean;
+  // error: string;
+};
+
+let initialState: State = {
+  response: [],
+  // isLoading: false,
+  // error: "",
+};
 
 type Country = [
   {
@@ -60,104 +71,29 @@ type Country = [
   }
 ];
 
-let initialCountry: Country = [
-  {
-    name: "",
-    topLevelDomain: [],
-    alpha2Code: "",
-    alpha3Code: "",
-    callingCodes: [],
-    capital: "",
-    altSpellings: [],
-    region: "",
-    subregion: "",
-    population: 0,
-    latlng: [],
-    demonym: "",
-    area: 0,
-    gini: 0,
-    timezones: [],
-    borders: [],
-    nativeName: "",
-    numericCode: "",
-    currencies: [
-      {
-        code: "",
-        name: "",
-        symbol: "",
-      },
-    ],
-    languages: [
-      {
-        iso639_1: "",
-        iso639_2: "",
-        name: "",
-        nativeName: "",
-      },
-    ],
-    translations: {
-      de: "",
-      es: "",
-      fr: "",
-      ja: "",
-      it: "",
-      br: "",
-      pt: "",
-      nl: "",
-      hr: "",
-      fa: "",
-    },
-    flag: "",
-    regionalBlocs: [
-      {
-        acronym: "",
-        name: "",
-        otherAcronyms: [],
-        otherNames: [],
-      },
-    ],
-    cioc: "",
-  },
-];
-
-
-
-interface State {
-  response?: Country[];
-  isLoading: boolean;
-  error: string;
-}
-
 type Action =
-  | { type: "LOADING"; isLoading: boolean }
-  | { type: "RESOLVED"; response: Country[] }
-  | { type: "ERROR"; error: string };
+  | { type: "LOADING"; payload: boolean }
+  | { type: "RESOLVED"; payload: Country[] }
+  | { type: "ERROR"; payload: string };
 
-  let initialState:State= {
-    response: [],
-    isLoading: false,
-    error: "",
-  };
-  
-
-function reducer(state: State, action: Action) {
+function reducer(state: State = initialState, action: Action) {
   switch (action.type) {
-    case "LOADING":
-      return { ...state, isLoading: true };
+    // case "LOADING":
+    //   return { ...state, isLoading: action.payload };
     case "RESOLVED":
       return {
         ...state,
         isLoading: false,
-        response: action.response,
+        response: action.payload,
         error: null,
       };
-    case "ERROR":
-      return {
-        ...state,
-        isLoading: false,
-        response: null,
-        error: action,
-      };
+    // case "ERROR":
+    //   return {
+    //     ...state,
+    //     isLoading: false,
+    //     response: null,
+    //     error: action.payload,
+    //   };
     default:
       return state;
   }
@@ -167,12 +103,14 @@ export const GlobalContext = createContext(initialState);
 
 const GlobalProvider: React.FC = ({ children }) => {
   const link = `https://restcountries.eu/rest/v2/all`;
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   async function fetchData() {
     const response = await fetch(link);
     const data = await response.json();
-    // dispatch({ type: "RESOLVED", response: data });
+    console.log(data);
+    
+    dispatch({ type: "RESOLVED", payload: data });
   }
 
   useEffect(() => {
@@ -180,7 +118,7 @@ const GlobalProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <GlobalContext.Provider value={{ state: state.response, dispatch }}>
+    <GlobalContext.Provider value={{ response: state.response }}>
       {children}
     </GlobalContext.Provider>
   );
