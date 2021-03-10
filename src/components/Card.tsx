@@ -39,7 +39,7 @@ const ItemWrapper = styled.div`
 `;
 
 export default function Card() {
-  const { countryData, dispatch } = useContext(GlobalContext);
+  const { countryData, allData, dispatch } = useContext(GlobalContext);
   const [searchCountry, setSearchCountry] = useState("");
   const region: string[] = [
     "All countries",
@@ -53,21 +53,18 @@ export default function Card() {
   const searchData = (e: any) => {
     const form = e.target;
     setSearchCountry(form.value);
-    const filterData = countryData.filter((data: any) =>
+    const filterData = allData.filter((data: any) =>
       data.name.toLowerCase().includes(form.value.toLowerCase())
     );
     dispatch({ type: "SEARCH_COUNTRY", payload: filterData });
-    console.log(filterData);
   };
 
   const searchByRegion = (e: any) => {
-    const filterRegion = countryData.filter(
+    const filterRegion = allData.filter(
       (data: any) => data.region === e.target.value
     );
-    console.log(filterRegion, countryData);
-
     if (e.target.value === "All countries") {
-      dispatch({ type: "SEARCH_BY_REGION", payload: countryData });
+      dispatch({ type: "SEARCH_BY_REGION", payload: allData });
     } else {
       dispatch({ type: "SEARCH_BY_REGION", payload: filterRegion });
     }
