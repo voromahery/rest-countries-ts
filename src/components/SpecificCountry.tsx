@@ -3,13 +3,25 @@ import { useParams, Link } from "react-router-dom";
 import { GlobalContext } from "./../GlobalContext";
 export default function SpecificCountry() {
   const { countryData } = useContext(GlobalContext);
-  const countryName:string = useParams();
-  const findCountry = countryData.find((data: any) => data.name === countryName );
-  console.log(findCountry, countryName);
-  
+  const name: {name: string} = useParams();
+  const findCountry = countryData.find((data: any) => data.name === name.name);
+  console.log(findCountry);
+
+  // flag: string;
+  // name: string;
+  // nativeName: string;
+  // population: number;
+  // region: string;
+  // subregion: string;
+  // capital: string;
+  // currencies: { name: string };
+  // topLevelDomain: string[];
+  // // languages: any;
+  // borders: string[]
+
   return (
     <div>
-      {/* <Link to="/">
+      <Link to="/">
         <button>Back</button>
       </Link>
       <div>
@@ -23,9 +35,18 @@ export default function SpecificCountry() {
           <li>Capital: {findCountry.capital}</li>
         </ul>
         <ul>
-          <li>Top Level Domain: {findCountry.topLevelDomain}</li>
-          <li>Currencies: {findCountry.currencies}</li>
-          <li>Languages: {findCountry.languages}</li>
+          <li>
+            Top Level Domain:
+            {findCountry.topLevelDomain.map((data: string[]) => data)}
+          </li>
+          <li>
+            Currencies:
+            {findCountry.currencies.map((data: { name: string }) => data.name)}
+          </li>
+          {/* <li>
+            Languages:
+            {findCountry.languages.map((data: { name: string }) => data)}
+          </li> */}
         </ul>
         <div>
           Border countries
@@ -37,7 +58,7 @@ export default function SpecificCountry() {
             ))}
           </ul>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }

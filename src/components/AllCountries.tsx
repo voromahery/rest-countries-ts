@@ -10,7 +10,7 @@ export default function AllCountries() {
         <Route exact path="/">
           <Card />
         </Route>
-        <Route exact path="/country/:countryName">
+        <Route exact path="/country/:name">
           <SpecificCountry />
         </Route>
       </Switch>

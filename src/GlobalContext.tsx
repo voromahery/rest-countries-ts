@@ -1,10 +1,11 @@
-import React, { createContext, useReducer, useEffect } from "react";
+import React, { createContext, useReducer, useEffect, useState } from "react";
 type State = {
   countryData: any;
 };
 
 let initialState: State = {
   countryData: [],
+  // dispatch: () => null
 };
 
 type Country = [
@@ -70,6 +71,7 @@ type Country = [
 type Action =
   | { type: "LOADING"; payload: boolean }
   | { type: "RESOLVED"; payload: Country[] }
+  | { type: "SEARCH_COUNTRY"; payload: Country[] }
   | { type: "ERROR"; payload: string };
 
 function reducer(state: State = initialState, action: Action) {
@@ -80,6 +82,11 @@ function reducer(state: State = initialState, action: Action) {
         isLoading: false,
         countryData: action.payload,
         error: null,
+      };
+    case "SEARCH_COUNTRY":
+      return {
+        ...state,
+        countryData: action.payload,
       };
     default:
       return state;
@@ -96,7 +103,7 @@ const GlobalProvider: React.FC = ({ children }) => {
     const countryData = await fetch(link);
     const data = await countryData.json();
     console.log(data);
-    
+
     dispatch({ type: "RESOLVED", payload: data });
   }
 
@@ -105,7 +112,15 @@ const GlobalProvider: React.FC = ({ children }) => {
   }, []);
 
   return (
-    <GlobalContext.Provider value={{ countryData: state.countryData }}>
+    <GlobalContext.Provider
+      value={{
+        countryData: state.countryData,
+        // search: (e) =>
+        //   dispatch({ type: "SEARCH_COUNTRY", payload: e.target.value }),
+        // searchCountry,
+        // setSearchCountry,
+      }}
+    >
       {children}
     </GlobalContext.Provider>
   );
