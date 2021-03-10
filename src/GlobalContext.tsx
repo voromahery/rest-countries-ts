@@ -73,6 +73,7 @@ type Action =
   | { type: "LOADING"; payload: boolean }
   | { type: "RESOLVED"; payload: Country[] }
   | { type: "SEARCH_COUNTRY"; payload: Country[] }
+  | { type: "SEARCH_BY_REGION"; payload: Country[] }
   | { type: "ERROR"; payload: string };
 
 function reducer(state: State = initialState, action: Action) {
@@ -85,6 +86,11 @@ function reducer(state: State = initialState, action: Action) {
         error: null,
       };
     case "SEARCH_COUNTRY":
+      return {
+        ...state,
+        countryData: action.payload,
+      };
+    case "SEARCH_BY_REGION":
       return {
         ...state,
         countryData: action.payload,
@@ -104,7 +110,6 @@ const GlobalProvider: React.FC = ({ children }) => {
     const countryData = await fetch(link);
     const data = await countryData.json();
     console.log(data);
-
     dispatch({ type: "RESOLVED", payload: data });
   }
 
@@ -116,7 +121,7 @@ const GlobalProvider: React.FC = ({ children }) => {
     <GlobalContext.Provider
       value={{
         countryData: state.countryData,
-        dispatch
+        dispatch,
       }}
     >
       {children}
