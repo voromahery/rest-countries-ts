@@ -3,21 +3,28 @@ import { useParams, Link } from "react-router-dom";
 import { GlobalContext } from "./../GlobalContext";
 export default function SpecificCountry() {
   const { countryData } = useContext(GlobalContext);
-  const name: {name: string} = useParams();
-  const findCountry = countryData.find((data: any) => data.name === name.name);
+  const name: { name: string } = useParams();
+  const findCountry = countryData.find(
+    (data: {
+      flag: string;
+      name: string;
+      nativeName: string;
+      population: number;
+      region: string;
+      subregion: string;
+      capital: string;
+      currencies: { name: string };
+      topLevelDomain: string[];
+      // languages: {
+      //   name: string;
+      //   iso639_1: string;
+      //   iso639_2: string;
+      //   nativeName: string;
+      // };
+      borders: string[];
+    }) => data.name === name.name
+  );
   console.log(findCountry);
-
-  // flag: string;
-  // name: string;
-  // nativeName: string;
-  // population: number;
-  // region: string;
-  // subregion: string;
-  // capital: string;
-  // currencies: { name: string };
-  // topLevelDomain: string[];
-  // // languages: any;
-  // borders: string[]
 
   return (
     <div>
@@ -37,11 +44,15 @@ export default function SpecificCountry() {
         <ul>
           <li>
             Top Level Domain:
-            {findCountry.topLevelDomain.map((data: string[]) => data)}
+            {findCountry.topLevelDomain.map((data: string[], index: number) => (
+              <div key={data[index]}>{data}</div>
+            ))}
           </li>
           <li>
             Currencies:
-            {findCountry.currencies.map((data: { name: string }) => data.name)}
+            {findCountry.currencies.map((data: { name: string }) => (
+              <div key={data.name}>{data.name}</div>
+            ))}
           </li>
           {/* <li>
             Languages:

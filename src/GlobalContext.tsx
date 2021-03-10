@@ -1,11 +1,12 @@
 import React, { createContext, useReducer, useEffect, useState } from "react";
 type State = {
   countryData: any;
+  dispatch: React.Dispatch<any>;
 };
 
 let initialState: State = {
   countryData: [],
-  // dispatch: () => null
+  dispatch: () => null,
 };
 
 type Country = [
@@ -115,10 +116,7 @@ const GlobalProvider: React.FC = ({ children }) => {
     <GlobalContext.Provider
       value={{
         countryData: state.countryData,
-        // search: (e) =>
-        //   dispatch({ type: "SEARCH_COUNTRY", payload: e.target.value }),
-        // searchCountry,
-        // setSearchCountry,
+        dispatch
       }}
     >
       {children}
