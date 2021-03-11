@@ -1,6 +1,30 @@
 import React, { useContext } from "react";
 import { useParams, Link } from "react-router-dom";
+import styled from "styled-components";
 import { GlobalContext } from "./../GlobalContext";
+
+const Wrapper = styled.div`
+  @media (min-width: 650px) {
+    display: flex;
+    flex-direction: row;
+    gap: 64px;
+    flex-wrap: nowrap;
+  }
+`;
+
+const Image = styled.img`
+  @media (min-width: 650px) {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+`;
+
+const Details = styled.div`
+  @media (min-width: 650px) {
+    flex-basis: 50%;
+  }
+`;
+
 export default function SpecificCountry() {
   const { countryData } = useContext(GlobalContext);
   const name: { name: string } = useParams();
@@ -24,58 +48,68 @@ export default function SpecificCountry() {
       borders: string[];
     }) => data.name === name.name
   );
-  console.log(findCountry);
 
   return (
     <div>
       <Link to="/">
         <button>Back</button>
       </Link>
-      <div>
-        <img src={findCountry.flag} alt="flag" />
-        <h3>{findCountry.name}</h3>
-        <ul>
-          <li>Native Name: {findCountry.nativeName}</li>
-          <li>Population: {findCountry.population}</li>
-          <li>Region: {findCountry.region}</li>
-          <li>Sub Region: {findCountry.subregion}</li>
-          <li>Capital: {findCountry.capital}</li>
-        </ul>
-        <ul>
-          <li>
-            Top Level Domain:
-            {findCountry.topLevelDomain.map((data: string[], index: number) => (
-              <div key={data[index]}>{data}</div>
-            ))}
-          </li>
-          <li>
-            Currencies:
-            {findCountry.currencies.map((data: { name: string }) => (
-              <div key={data.name}>{data.name}</div>
-            ))}
-          </li>
-          {/* <li>
+      <Wrapper>
+        <Image src={findCountry.flag} alt="flag" />
+        <Details>
+          <h3>{findCountry.name}</h3>
+          <ul>
+            <li>Native Name: {findCountry.nativeName}</li>
+            <li>Population: {findCountry.population}</li>
+            <li>Region: {findCountry.region}</li>
+            <li>Sub Region: {findCountry.subregion}</li>
+            <li>Capital: {findCountry.capital}</li>
+          </ul>
+          <ul>
+            <li>
+              Top Level Domain:
+              {findCountry.topLevelDomain.map(
+                (data: string[], index: number) => (
+                  <div key={data[index]}>{data}</div>
+                )
+              )}
+            </li>
+            <li>
+              Currencies:
+              {findCountry.currencies.map((data: { name: string }) => (
+                <div key={data.name}>{data.name}</div>
+              ))}
+            </li>
+            {/* <li>
             Languages:
             {findCountry.languages.map((data: { name: string }) => data)}
           </li> */}
-        </ul>
-        <div>
-          Border countries
-          <ul>
-            {findCountry.borders.map((data: string, index: number) => {
-              const findCity = countryData.find(
-                (item: { alpha3Code: string }) => item.alpha3Code === data
-              );
-
-              return (
-                <Link key={data[index]} to={`/border/${data}`}>
-                  <button>{findCity.name}</button>
-                </Link>
-              );
-            })}
           </ul>
-        </div>
-      </div>
+          <div>
+            {findCountry.borders.length > 0 ? (
+              <div>
+                Border countries
+                <ul>
+                  {findCountry.borders.map((data: string, index: number) => {
+                    const findCity = countryData.find(
+                      (item: { alpha3Code: string; alpha2Code: string }) =>
+                        item.alpha3Code === data || item.alpha2Code === data
+                    );
+
+                    return (
+                      <Link key={data[index]} to={`/border/${data}`}>
+                        <button>{findCity && findCity.name}</button>
+                      </Link>
+                    );
+                  })}
+                </ul>
+              </div>
+            ) : (
+              <p>This country has no border country.</p>
+            )}
+          </div>
+        </Details>
+      </Wrapper>
     </div>
   );
 }
