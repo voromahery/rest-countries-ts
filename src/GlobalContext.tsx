@@ -3,12 +3,14 @@ type State = {
   countryData: any;
   allData: any;
   dispatch: React.Dispatch<any>;
+  mode: boolean;
 };
 
 let initialState: State = {
   countryData: [],
   allData: [],
   dispatch: () => null,
+  mode: false,
 };
 
 type Country = [
@@ -76,6 +78,7 @@ type Action =
   | { type: "RESOLVED"; payload: Country[] }
   | { type: "SEARCH_COUNTRY"; payload: Country[] }
   | { type: "SEARCH_BY_REGION"; payload: Country[] }
+  | { type: "CHANGE_MODE"; payload: boolean }
   | { type: "ERROR"; payload: string };
 
 function reducer(state: State = initialState, action: Action) {
@@ -97,6 +100,11 @@ function reducer(state: State = initialState, action: Action) {
       return {
         ...state,
         countryData: action.payload,
+      };
+    case "CHANGE_MODE":
+      return {
+        ...state,
+        mode: action.payload,
       };
     default:
       return state;
@@ -126,6 +134,7 @@ const GlobalProvider: React.FC = ({ children }) => {
       value={{
         countryData: state.countryData,
         allData: state.allData,
+        mode: state.mode,
         dispatch,
       }}
     >

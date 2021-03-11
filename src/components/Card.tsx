@@ -3,44 +3,8 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { GlobalContext } from "./../GlobalContext";
 
-const Wrapper = styled.div`
-  margin-top: 64px;
-  margin-bottom: 64px;
-  display: grid;
-  grid-gap: 64px;
-
-  @media (min-width: 650px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (min-width: 850px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-`;
-
-const Input = styled.input`
-  width: 100%;
-  max-width: 200px;
-`;
-
-const Image = styled.img`
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
-`;
-
-const Item = styled.div`
-  max-width: 264px;
-  background-color: #ffffff;
-  box-shadow: 0px 0px 4px hsl(0, 0%, 52%);
-  border-radius: 6px;
-`;
-
-const ItemWrapper = styled.div`
-  padding: 16px;
-`;
-
 export default function Card() {
-  const { countryData, allData, dispatch } = useContext(GlobalContext);
+  const { countryData, allData, mode, dispatch } = useContext(GlobalContext);
   const [searchCountry, setSearchCountry] = useState("");
   const region: string[] = [
     "All countries",
@@ -127,6 +91,44 @@ export default function Card() {
     }
   };
 
+  const Wrapper = styled.div`
+  margin-top: 64px;
+  margin-bottom: 64px;
+  display: grid;
+  grid-gap: 64px;
+
+  @media (min-width: 650px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 850px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+`;
+
+const Input = styled.input`
+  width: 100%;
+  max-width: 200px;
+`;
+
+const Image = styled.img`
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+`;
+
+const Item = styled.div`
+  background-color: ${mode ? "hsl(209, 23%, 22%)" : "hsl(0, 0%, 100%)"};
+  color: ${mode ? "hsl(0, 0%, 100%)" : "black"};
+  max-width: 264px;
+  box-shadow: 0px 0px 4px hsl(0, 0%, 52%);
+  border-radius: 6px;
+`;
+
+const ItemWrapper = styled.div`
+  padding: 16px;
+`;
+
+
   return (
     <div>
       <form>
@@ -169,3 +171,4 @@ export default function Card() {
     </div>
   );
 }
+

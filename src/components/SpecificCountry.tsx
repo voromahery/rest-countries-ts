@@ -12,6 +12,10 @@ const Wrapper = styled.div`
   }
 `;
 
+const Container = styled.div`
+background-color: hsl(0deg 0% 99%) ;
+`;
+
 const Image = styled.img`
   @media (min-width: 650px) {
     flex-basis: 50%;
@@ -50,7 +54,7 @@ export default function SpecificCountry() {
   );
 
   return (
-    <div>
+    <Container>
       <Link to="/">
         <button>Back</button>
       </Link>
@@ -110,6 +114,6 @@ export default function SpecificCountry() {
           </div>
         </Details>
       </Wrapper>
-    </div>
+    </Container>
   );
 }
