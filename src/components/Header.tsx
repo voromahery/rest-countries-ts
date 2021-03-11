@@ -10,6 +10,13 @@ export default function Header() {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    background-color: ${mode ? " hsl(209, 23%, 22%)" : "hsl(0, 0%, 100%)"};
+    color: ${mode ? "hsl(0, 0%, 100%)" : "black"};
+    box-shadow: 0px 0px 4px ${mode?"hsl(207, 26%, 17%)":"hsl(0, 0%, 52%)"};
+  `;
+
+  const Mode = styled.div`
+    cursor: pointer;
   `;
 
   const darkMode = () => {
@@ -19,7 +26,7 @@ export default function Header() {
   return (
     <Container>
       <h3>Where in the world?</h3>
-      <div onClick={darkMode}>{mode ? "Dark mode" : "Light mode"} </div>
+      <Mode onClick={darkMode}>{mode ? "Light mode" : "Dark mode"} </Mode>
     </Container>
   );
 }

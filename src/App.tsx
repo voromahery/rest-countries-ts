@@ -9,7 +9,7 @@ function App() {
   const { mode } = useContext(GlobalContext);
 
   const Wrapper = styled.div`
-    background-color: ${mode ? "hsl(207, 26%, 17%)" : "hsl(0, 0%, 100%)"};
+    background-color: ${mode ? "hsl(207, 26%, 17%)" : "hsl(0, 0%, 98%)"};
     color: ${mode ? "hsl(0, 0%, 100%)" : "black"};
   `;
   return (

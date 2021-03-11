@@ -12,10 +12,6 @@ const Wrapper = styled.div`
   }
 `;
 
-const Container = styled.div`
-background-color: hsl(0deg 0% 99%) ;
-`;
-
 const Image = styled.img`
   @media (min-width: 650px) {
     flex-basis: 50%;
@@ -30,7 +26,7 @@ const Details = styled.div`
 `;
 
 export default function SpecificCountry() {
-  const { countryData } = useContext(GlobalContext);
+  const { countryData, mode } = useContext(GlobalContext);
   const name: { name: string } = useParams();
   const findCountry = countryData.find(
     (data: {
@@ -52,6 +48,23 @@ export default function SpecificCountry() {
       borders: string[];
     }) => data.name === name.name
   );
+  const Container = styled.div`
+    background-color: ${mode ? "hsl(207, 26%, 17%)" : " hsl(0, 0%, 98%)"};
+    height: 100vh;
+  `;
+
+  const Button = styled.button`
+    border: none;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    margin-right: 10px;
+    margin-bottom: 16px;
+    background-color: ${mode ? "hsl(209, 23%, 22%)" : "hsl(0, 0%, 100%)"};
+    color: ${mode ? "hsl(0, 0%, 100%)" : "black"};
+    box-shadow: 0px 0px 4px ${mode?"hsl(207, 26%, 17%)":"hsl(0, 0%, 52%)"};
+  `;
 
   return (
     <Container>
@@ -102,7 +115,7 @@ export default function SpecificCountry() {
 
                     return (
                       <Link key={data[index]} to={`/border/${data}`}>
-                        <button>{findCity && findCity.name}</button>
+                        <Button>{findCity && findCity.name}</Button>
                       </Link>
                     );
                   })}

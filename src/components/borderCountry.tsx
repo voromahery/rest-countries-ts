@@ -26,7 +26,7 @@ const Details = styled.div`
 `;
 
 export default function BorderCountry() {
-  const { countryData } = useContext(GlobalContext);
+  const { countryData, mode } = useContext(GlobalContext);
   const border: { border: string } = useParams();
 
   const findCountry = countryData.find(
@@ -45,8 +45,26 @@ export default function BorderCountry() {
     }) => data.alpha3Code === border.border
   );
 
+  const Container = styled.div`
+    background-color: ${mode ? "hsl(207, 26%, 17%)" : " hsl(0, 0%, 98%)"};
+    height: 100vh;
+  `;
+
+  const Button = styled.button`
+    border: none;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    margin-right: 10px;
+    margin-bottom: 16px;
+    background-color: ${mode ? "hsl(209, 23%, 22%)" : "hsl(0, 0%, 100%)"};
+    color: ${mode ? "hsl(0, 0%, 100%)" : "black"};
+    box-shadow: 0px 0px 4px ${mode ? "hsl(207, 26%, 17%)" : "hsl(0, 0%, 52%)"};
+  `;
+
   return (
-    <div>
+    <Container>
       <Link to="/">
         <button>Back</button>
       </Link>
@@ -98,7 +116,7 @@ export default function BorderCountry() {
 
                           return (
                             <Link key={data[index]} to={`/border/${data}`}>
-                              <button>{findCity && findCity.name}</button>
+                              <Button>{findCity && findCity.name}</Button>
                             </Link>
                           );
                         }
@@ -113,6 +131,6 @@ export default function BorderCountry() {
           </div>
         </Details>
       </Wrapper>
-    </div>
+    </Container>
   );
 }
