@@ -6,10 +6,11 @@ import { GlobalContext } from "./../GlobalContext";
 const Wrapper = styled.div`
   margin-top: 64px;
   margin-bottom: 64px;
+  display: grid;
+  grid-gap: 64px;
+
   @media (min-width: 650px) {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 64px;
   }
 
   @media (min-width: 850px) {
@@ -50,7 +51,7 @@ export default function Card() {
     "Oceania",
   ];
 
-  const searchData = (e: any) => {
+  const searchData = (e: React.ChangeEvent<HTMLInputElement>) => {
     const form = e.target;
     setSearchCountry(form.value);
     const filterData = allData.filter((data: any) =>

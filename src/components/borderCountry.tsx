@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import { GlobalContext } from "./../GlobalContext";
-export default function SpecificCountry() {
+export default function BorderCountry() {
   const { countryData } = useContext(GlobalContext);
-  const name: { name: string } = useParams();
+  const border: { border: string } = useParams();
+
   const findCountry = countryData.find(
     (data: {
       flag: string;
@@ -15,16 +16,11 @@ export default function SpecificCountry() {
       capital: string;
       currencies: { name: string };
       topLevelDomain: string[];
-      // languages: {
-      //   name: string;
-      //   iso639_1: string;
-      //   iso639_2: string;
-      //   nativeName: string;
-      // };
+      alpha3Code: string;
       borders: string[];
-    }) => data.name === name.name
+    }) => data.alpha3Code === border.border
   );
-  console.log(findCountry);
+  console.log(findCountry, border);
 
   return (
     <div>
@@ -63,16 +59,13 @@ export default function SpecificCountry() {
           Border countries
           <ul>
             {findCountry.borders.map((data: string, index: number) => {
-              const findCity = countryData.find(
-                (item: { alpha3Code: string }) => item.alpha3Code === data
-              );
-
+              const findCity = countryData.find((item: {alpha3Code: string}) => item.alpha3Code === data)
+              console.log(findCity);
               return (
-                <Link key={data[index]} to={`/border/${data}`}>
-                  <button>{findCity.name}</button>
-                </Link>
-              );
-            })}
+              <Link key={data[index]} to={`/border/${data}`}>
+                <button>{findCity.name}</button>
+              </Link>
+            )})}
           </ul>
         </div>
       </div>
