@@ -163,14 +163,14 @@ export default function Card() {
   return (
     <div>
       <Form>
-        <Input type="text" onChange={searchData} value={searchCountry} placeholder="Search for a country..."/>
-        <Select onChange={searchByRegion}>
+        <input type="text" onChange={searchData} value={searchCountry} placeholder="Search for a country..."/>
+        <select onChange={searchByRegion}>
           {region.map((data) => (
             <option value={data} key={data}>
               {data}
             </option>
           ))}
-        </Select>
+        </select>
       </Form>
       <Wrapper>
         {countryData.map(

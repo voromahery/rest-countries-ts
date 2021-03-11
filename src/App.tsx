@@ -8,15 +8,15 @@ import styled from "styled-components";
 function App() {
   const { mode } = useContext(GlobalContext);
 
-  const Wrapper = styled.div`
-    background-color: ${mode ? "hsl(207, 26%, 17%)" : "hsl(0, 0%, 98%)"};
-    color: ${mode ? "hsl(0, 0%, 100%)" : "black"};
-  `;
+  //  const AppWrapper = styled.div`
+  //    background-color: ${mode ? "hsl(207, 26%, 17%)" : "hsl(0, 0%, 98%)"};
+  //    color: ${mode ? "hsl(0, 0%, 100%)" : "black"};
+  //  `;
   return (
-    <Wrapper className="App">
+    <div className="App">
       <Header />
       <AllCountries />
-    </Wrapper>
+    </div>
   );
 }
 
