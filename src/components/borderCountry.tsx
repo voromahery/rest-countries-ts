@@ -26,10 +26,10 @@ const Details = styled.div`
 `;
 
 export default function BorderCountry() {
-  const { countryData, mode } = useContext(GlobalContext);
+  const { allData, mode } = useContext(GlobalContext);
   const border: { border: string } = useParams();
 
-  const findCountry = countryData.find(
+  const findCountry = allData.find(
     (data: {
       flag: string;
       name: string;
@@ -91,7 +91,7 @@ export default function BorderCountry() {
                     <ul>
                       {findCountry.borders.map(
                         (data: string, index: number) => {
-                          const findCity = countryData.find(
+                          const findCity = allData.find(
                             (item: { alpha3Code: string }) =>
                               item.alpha3Code === data
                           );

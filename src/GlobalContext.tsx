@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect, useState } from "react";
+import React, { createContext, useReducer, useEffect } from "react";
 type State = {
   countryData: any;
   allData: any;
