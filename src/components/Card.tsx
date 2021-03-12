@@ -124,47 +124,11 @@ export default function Card() {
     }
   };
 
-  const Item = styled.div`
-    background-color: ${mode ? "hsl(209, 23%, 22%)" : "hsl(0, 0%, 100%)"};
-    color: ${mode ? "hsl(0, 0%, 100%)" : "black"};
-    max-width: 264px;
-    box-shadow: 0px 0px 4px ${mode ? "hsl(207, 26%, 17%)" : "hsl(0, 0%, 52%)"};
-    border-radius: 6px;
-  `;
-
-  const Input = styled.input`
-    width: 100%;
-    max-width: 480px;
-    border-radius: 6px;
-    border: none;
-    padding-left: 32px;
-    padding-right: 32px;
-    padding-top: 17px;
-    padding-bottom: 17px;
-    background-color: ${mode ? "hsl(209, 23%, 22%)" : "hsl(0, 0%, 100%)"};
-    color: ${mode ? "hsl(0, 0%, 100%)" : "black"};
-    box-shadow: 0px 0px 4px ${mode ? "hsl(207, 26%, 17%)" : "hsl(0, 0%, 52%)"};
-  `;
-
-  const Select = styled.select`
-    width: 100%;
-    max-width: 200px;
-    border-radius: 6px;
-    border: none;
-    padding-left: 32px;
-    padding-right: 32px;
-    padding-top: 17px;
-    padding-bottom: 17px;
-    background-color: ${mode ? "hsl(209, 23%, 22%)" : "hsl(0, 0%, 100%)"};
-    color: ${mode ? "hsl(0, 0%, 100%)" : "black"};
-    box-shadow: 0px 0px 4px ${mode ? "hsl(207, 26%, 17%)" : "hsl(0, 0%, 52%)"};
-  `;
-
   return (
     <div>
       <Form>
-        <input type="text" onChange={searchData} value={searchCountry} placeholder="Search for a country..."/>
-        <select onChange={searchByRegion}>
+        <input type="text" onChange={searchData} className={`${mode ? "input-light-mode" : "input-dark-mode"}`} value={searchCountry} placeholder="Search for a country..."/>
+        <select onChange={searchByRegion} className={`${mode ? "select-light-mode" : "select-dark-mode"}`}>
           {region.map((data) => (
             <option value={data} key={data}>
               {data}
@@ -181,7 +145,7 @@ export default function Card() {
             region: string;
             capital: string;
           }) => (
-            <Item key={data.name}>
+            <div className={`${mode ? "light-card" : "dark-card"} card`} key={data.name}>
               <Link to={`/country/${data.name}`}>
                 <div>
                   <Image src={data.flag} alt="flag" />
@@ -195,7 +159,7 @@ export default function Card() {
                   </ItemWrapper>
                 </div>
               </Link>
-            </Item>
+            </div>
           )
         )}
       </Wrapper>

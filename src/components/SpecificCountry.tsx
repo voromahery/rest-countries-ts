@@ -48,26 +48,9 @@ export default function SpecificCountry() {
       borders: string[];
     }) => data.name === name.name
   );
-  const Container = styled.div`
-    background-color: ${mode ? "hsl(207, 26%, 17%)" : " hsl(0, 0%, 98%)"};
-    height: 100vh;
-  `;
-
-  const Button = styled.button`
-    border: none;
-    padding-left: 24px;
-    padding-right: 24px;
-    padding-top: 6px;
-    padding-bottom: 6px;
-    margin-right: 10px;
-    margin-bottom: 16px;
-    background-color: ${mode ? "hsl(209, 23%, 22%)" : "hsl(0, 0%, 100%)"};
-    color: ${mode ? "hsl(0, 0%, 100%)" : "black"};
-    box-shadow: 0px 0px 4px ${mode?"hsl(207, 26%, 17%)":"hsl(0, 0%, 52%)"};
-  `;
-
+  
   return (
-    <Container>
+    <div className={`${mode ? "light-container" : "dark-container"} container`}>
       <Link to="/">
         <button>Back</button>
       </Link>
@@ -115,7 +98,7 @@ export default function SpecificCountry() {
 
                     return (
                       <Link key={data[index]} to={`/border/${data}`}>
-                        <Button>{findCity && findCity.name}</Button>
+                        <button className={`${mode ? "button-light-mode" : "button-dark-mode"}`}>{findCity && findCity.name}</button>
                       </Link>
                     );
                   })}
@@ -127,6 +110,6 @@ export default function SpecificCountry() {
           </div>
         </Details>
       </Wrapper>
-    </Container>
+    </div>
   );
 }
