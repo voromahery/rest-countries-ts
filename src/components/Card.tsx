@@ -3,11 +3,19 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { GlobalContext } from "./../GlobalContext";
 
+const Container = styled.div`
+  @media (min-width: 850px) {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+`;
+
 const Wrapper = styled.div`
-  margin-top: 64px;
-  margin-bottom: 64px;
+  padding-top: 64px;
+  padding-bottom: 64px;
   display: grid;
   grid-gap: 64px;
+  justify-items: center;
 
   @media (min-width: 650px) {
     grid-template-columns: repeat(2, 1fr);
@@ -15,6 +23,9 @@ const Wrapper = styled.div`
 
   @media (min-width: 850px) {
     grid-template-columns: repeat(3, 1fr);
+  }
+  @media (min-width: 1000px) {
+    grid-template-columns: repeat(4, 1fr);
   }
 `;
 
@@ -42,7 +53,7 @@ export default function Card() {
   const region: string[] = [
     "All countries",
     "Africa",
-    "America",
+    "Americas",
     "Asia",
     "Europe",
     "Oceania",
@@ -125,10 +136,19 @@ export default function Card() {
   };
 
   return (
-    <div>
+    <Container>
       <Form>
-        <input type="text" onChange={searchData} className={`${mode ? "input-light-mode" : "input-dark-mode"}`} value={searchCountry} placeholder="Search for a country..."/>
-        <select onChange={searchByRegion} className={`${mode ? "select-light-mode" : "select-dark-mode"}`}>
+        <input
+          type="text"
+          onChange={searchData}
+          className={`${mode ? "input-light-mode" : "input-dark-mode"}`}
+          value={searchCountry}
+          placeholder="Search for a country..."
+        />
+        <select
+          onChange={searchByRegion}
+          className={`${mode ? "select-light-mode" : "select-dark-mode"}`}
+        >
           {region.map((data) => (
             <option value={data} key={data}>
               {data}
@@ -145,7 +165,10 @@ export default function Card() {
             region: string;
             capital: string;
           }) => (
-            <div className={`${mode ? "light-card" : "dark-card"} card`} key={data.name}>
+            <div
+              className={`${mode ? "light-card" : "dark-card"} card`}
+              key={data.name}
+            >
               <Link to={`/country/${data.name}`}>
                 <div>
                   <Image src={data.flag} alt="flag" />
@@ -163,6 +186,6 @@ export default function Card() {
           )
         )}
       </Wrapper>
-    </div>
+    </Container>
   );
 }

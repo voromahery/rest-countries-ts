@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { GlobalContext } from "./../GlobalContext";
 
 const Wrapper = styled.div`
+  height: 100vh;
   @media (min-width: 650px) {
     display: flex;
     flex-direction: row;
@@ -16,6 +17,7 @@ const Image = styled.img`
   @media (min-width: 650px) {
     flex-basis: 50%;
     max-width: 50%;
+    height: max-content;
   }
 `;
 
@@ -98,7 +100,15 @@ export default function BorderCountry() {
 
                           return (
                             <Link key={data[index]} to={`/border/${data}`}>
-                              <button className={`${mode ? "button-light-mode" : "button-dark-mode"}`}>{findCity && findCity.name}</button>
+                              <button
+                                className={`${
+                                  mode
+                                    ? "button-light-mode"
+                                    : "button-dark-mode"
+                                }`}
+                              >
+                                {findCity && findCity.name}
+                              </button>
                             </Link>
                           );
                         }
