@@ -184,9 +184,9 @@ export default function Card() {
                   <ItemWrapper>
                     <h3 style={{ margin: "0" }}>{data.name}</h3>
                     <ul>
-                      <li>Population: {data.population}</li>
-                      <li>Region: {data.region}</li>
-                      <li>Capital: {data.capital}</li>
+                      <li><span>Population:</span> {data.population}</li>
+                      <li><span>Region:</span> {data.region}</li>
+                      <li><span>Capital:</span> {data.capital}</li>
                     </ul>
                   </ItemWrapper>
                 </div>

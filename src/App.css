@@ -12,6 +12,10 @@ a {
   color: inherit;
 }
 
+li > span {
+  font-weight: 500;
+}
+
 button,
 .mode {
   cursor: pointer;
