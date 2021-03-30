@@ -78,7 +78,7 @@ export default function BorderCountry() {
                 <div key={data.name}>{data.name}</div>
               ))}
             </li>
-            {/* <li>
+            {/* s<li>
             Languages:
             {findCountry.languages.map((data: { name: string }) => data)}
           </li> */}

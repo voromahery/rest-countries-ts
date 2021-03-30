@@ -3,6 +3,15 @@ import { useParams, Link } from "react-router-dom";
 import styled from "styled-components";
 import { GlobalContext } from "./../GlobalContext";
 
+const SpecificCountryContainer = styled.div`
+  padding-left: 18px;
+  padding-right: 18px;
+  @media (min-width: 650px) {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+`;
+
 const Wrapper = styled.div`
   height: 100vh;
   @media (min-width: 650px) {
@@ -52,7 +61,7 @@ export default function SpecificCountry() {
   );
 
   return (
-    <div className={`${mode ? "light-container" : "dark-container"} container`}>
+    <SpecificCountryContainer className={`${mode ? "light-container" : "dark-container"} container`}>
       <Link to="/">
         <button>Back</button>
       </Link>
@@ -118,6 +127,6 @@ export default function SpecificCountry() {
           </div>
         </Details>
       </Wrapper>
-    </div>
+    </SpecificCountryContainer>
   );
 }

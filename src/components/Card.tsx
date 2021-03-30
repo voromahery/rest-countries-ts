@@ -31,8 +31,10 @@ const Wrapper = styled.div`
 
 const Form = styled.form`
   margin-top: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
   @media (min-width: 650px) {
-    display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
