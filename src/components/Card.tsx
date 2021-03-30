@@ -4,15 +4,19 @@ import { Link } from "react-router-dom";
 import { GlobalContext } from "./../GlobalContext";
 
 const Container = styled.div`
-  @media (min-width: 850px) {
-    padding-left: 100px;
-    padding-right: 100px;
+  padding-left: 18px;
+  padding-right: 18px;
+  @media (min-width: 650px) {
+    padding-left: 80px;
+    padding-right: 80px;
   }
 `;
 
 const Wrapper = styled.div`
   padding-top: 64px;
   padding-bottom: 64px;
+  padding-left: 65px;
+  padding-right: 64px;
   display: grid;
   grid-gap: 64px;
   justify-items: center;
@@ -21,10 +25,10 @@ const Wrapper = styled.div`
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (min-width: 850px) {
+  @media (min-width: 900px) {
     grid-template-columns: repeat(3, 1fr);
   }
-  @media (min-width: 1000px) {
+  @media (min-width: 1200px) {
     grid-template-columns: repeat(4, 1fr);
   }
 `;
@@ -47,6 +51,9 @@ const Image = styled.img`
 
 const ItemWrapper = styled.div`
   padding: 16px;
+  @media (min-width: 300px) {
+    padding: 30px;
+  }
 `;
 
 export default function Card() {
@@ -175,7 +182,7 @@ export default function Card() {
                 <div>
                   <Image src={data.flag} alt="flag" />
                   <ItemWrapper>
-                    <h3>{data.name}</h3>
+                    <h3 style={{ margin: "0" }}>{data.name}</h3>
                     <ul>
                       <li>Population: {data.population}</li>
                       <li>Region: {data.region}</li>

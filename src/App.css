@@ -30,12 +30,17 @@ button,
 .light-container {
   background-color: hsl(207, 26%, 17%);
   color: hsl(0, 0%, 100%);
-  transition: all ease-in .3s;
 }
 
 .dark-mode,
 .dark-container {
   background-color: hsl(0, 0%, 98%);
   color: black;
-  transition: all ease-in .3s;
+}
+
+.dark-mode,
+.light-mode,
+.dark-container,
+.light-container {
+  transition: all ease-in 0.3s;
 }
