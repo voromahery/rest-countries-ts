@@ -1,7 +1,12 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
+import arrowBack from "../icons/arrow-back.svg";
 import { useParams, Link } from "react-router-dom";
 import { GlobalContext } from "./../GlobalContext";
+
+const BorderCountryContainer = styled.section`
+  height: 100%;
+`;
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -11,6 +16,17 @@ const Wrapper = styled.div`
     gap: 64px;
     flex-wrap: nowrap;
   }
+`;
+
+const Button = styled.button`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 18px;
+`;
+
+const Icon = styled.img`
+  max-width: 32px;
 `;
 
 const Image = styled.img`
@@ -48,9 +64,13 @@ export default function BorderCountry() {
   );
 
   return (
-    <div className={`${mode ? "light-container" : "dark-container"} container`}>
+    <BorderCountryContainer
+      className={`${mode ? "light-container" : "dark-container"} container`}
+    >
       <Link to="/">
-        <button>Back</button>
+        <Button>
+          <Icon src={arrowBack} alt="back-arrow" /> Back
+        </Button>
       </Link>
       <Wrapper>
         <Image src={findCountry.flag} alt="flag" />
@@ -78,7 +98,7 @@ export default function BorderCountry() {
                 <div key={data.name}>{data.name}</div>
               ))}
             </li>
-            {/* s<li>
+            {/*<li>
             Languages:
             {findCountry.languages.map((data: { name: string }) => data)}
           </li> */}
@@ -123,6 +143,6 @@ export default function BorderCountry() {
           </div>
         </Details>
       </Wrapper>
-    </div>
+    </BorderCountryContainer>
   );
 }

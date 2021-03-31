@@ -1,15 +1,28 @@
 import React, { useContext } from "react";
 import { useParams, Link } from "react-router-dom";
+import arrowBack from "../icons/arrow-back.svg";
 import styled from "styled-components";
 import { GlobalContext } from "./../GlobalContext";
 
 const SpecificCountryContainer = styled.div`
+  height: 100%;
   padding-left: 18px;
   padding-right: 18px;
   @media (min-width: 650px) {
     padding-left: 80px;
     padding-right: 80px;
   }
+`;
+
+const Button = styled.button`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 18px;
+`;
+
+const Icon = styled.img`
+  max-width: 32px;
 `;
 
 const Wrapper = styled.div`
@@ -61,9 +74,13 @@ export default function SpecificCountry() {
   );
 
   return (
-    <SpecificCountryContainer className={`${mode ? "light-container" : "dark-container"} container`}>
+    <SpecificCountryContainer
+      className={`${mode ? "light-container" : "dark-container"} container`}
+    >
       <Link to="/">
-        <button>Back</button>
+        <Button>
+          <Icon src={arrowBack} alt="back-arrow" /> Back
+        </Button>
       </Link>
       <Wrapper>
         <Image src={findCountry.flag} alt="flag" />

@@ -26,10 +26,13 @@ select, input {
 
 input {
   max-width: 480px;
+  width: -webkit-fill-available;
 }
 
 select {
   max-width: 200px;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 header {
