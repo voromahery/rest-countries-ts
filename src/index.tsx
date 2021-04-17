@@ -17,12 +17,4 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-// PLAN:
-// - API: Fetching
-// - Map 8 countries
-// - Use ReactRouter: To get access to the country details.
-
-// - Fetch by border country
-// - A new API
-
 reportWebVitals();
