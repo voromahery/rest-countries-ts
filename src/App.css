@@ -37,7 +37,6 @@ button,
 .light-mode,
 .light-container {
   background-color: hsl(207, 26%, 17%);
-  height: 100vh;
   color: hsl(0, 0%, 100%);
 }
 

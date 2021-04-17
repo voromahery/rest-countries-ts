@@ -9,14 +9,19 @@ const BorderCountryContainer = styled.section`
   height: 100%;
   padding-left: 18px;
   padding-right: 18px;
+  padding-top: 64px;
+  padding-bottom: 64px;
   @media (min-width: 650px) {
     padding-left: 80px;
     padding-right: 80px;
+    padding-top: 128px;
+    padding-bottom: 128px;
   }
 `;
 
 const Wrapper = styled.div`
   height: 100vh;
+  margin-top: 102.4px;
   @media (min-width: 650px) {
     display: flex;
     flex-direction: row;
