@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useParams, Link } from "react-router-dom";
-import arrowBack from "../icons/arrow-back.svg";
+import arrowBackWhite from "../icons/arrow-back-white.svg";
+import arrowBackDark from "../icons/arrow-back-dark.svg";
 import styled from "styled-components";
 import { GlobalContext } from "./../GlobalContext";
 
@@ -49,6 +50,16 @@ const Details = styled.div`
   }
 `;
 
+const SCTitle = styled.h3`
+  font-size: 28px;
+  @media (min-width: 300px) {
+    font-size: 32px;
+  }
+  @media (min-width: 800px) {
+    font-size: 52px;
+  }
+`;
+
 export default function SpecificCountry() {
   const { allData, mode } = useContext(GlobalContext);
   const name: { name: string } = useParams();
@@ -78,24 +89,39 @@ export default function SpecificCountry() {
       className={`${mode ? "light-container" : "dark-container"} container`}
     >
       <Link to="/">
-        <Button>
-          <Icon src={arrowBack} alt="back-arrow" /> Back
+        <Button className={`${mode ? "back-light-mode" : "back-dark-mode"}`}>
+          {mode ? (
+            <Icon src={arrowBackWhite} alt="back-arrow" />
+          ) : (
+            <Icon src={arrowBackDark} alt="back-arrow" />
+          )}{" "}
+          Back
         </Button>
       </Link>
       <Wrapper>
         <Image src={findCountry.flag} alt="flag" />
         <Details>
-          <h3>{findCountry.name}</h3>
+          <SCTitle>{findCountry.name}</SCTitle>
           <ul>
-            <li>Native Name: {findCountry.nativeName}</li>
-            <li>Population: {findCountry.population}</li>
-            <li>Region: {findCountry.region}</li>
-            <li>Sub Region: {findCountry.subregion}</li>
-            <li>Capital: {findCountry.capital}</li>
+            <li>
+              <b>Native Name:</b> {findCountry.nativeName}
+            </li>
+            <li>
+              <b>Population:</b> {findCountry.population}
+            </li>
+            <li>
+              <b>Region:</b> {findCountry.region}
+            </li>
+            <li>
+              <b>Sub Region:</b> {findCountry.subregion}
+            </li>
+            <li>
+              <b>Capital:</b> {findCountry.capital}
+            </li>
           </ul>
           <ul>
             <li>
-              Top Level Domain:
+              <b>Top Level Domain:</b>
               {findCountry.topLevelDomain.map(
                 (data: string[], index: number) => (
                   <div key={data[index]}>{data}</div>
@@ -103,7 +129,7 @@ export default function SpecificCountry() {
               )}
             </li>
             <li>
-              Currencies:
+              <b>Currencies:</b>
               {findCountry.currencies.map((data: { name: string }) => (
                 <div key={data.name}>{data.name}</div>
               ))}
@@ -116,7 +142,7 @@ export default function SpecificCountry() {
           <div>
             {findCountry.borders.length > 0 ? (
               <div>
-                Border countries
+                <b>Border countries</b>
                 <ul>
                   {findCountry.borders.map((data: string, index: number) => {
                     const findCity = allData.find(
